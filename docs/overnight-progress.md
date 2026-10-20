@@ -80,3 +80,25 @@ and safe CLI failures/watch behavior. No provider exception text is stored or em
 Rebuilt wheel/sdist pass Twine, the base-only installed-wheel smoke passes, and the rebuilt wheel
 with API/Azure extras passes the real generated-host Functions/Azurite test including restart.
 Next: Azure scaffold/documentation review and final morning review pack; no public release.
+
+## 3:27 a.m. Chicago: final readiness review
+
+Reviewed CI, Compose, Docker context and Terraform against actual implementation. Fixed Docker
+context exclusions so local Functions settings, nested environment files, SQLite/log data and Terraform
+provider caches/state are excluded. Added prefix/subscription-GUID validation to Terraform and kept
+package-exported templates synchronized. Terraform fmt/validate and Compose config pass.
+Docker engine is still stopped; no image/runtime verification is claimed. Added Azure-readiness matrix
+with remaining cloud-adapter/hosting/security work and the distinction between event delivery IDs and
+incident fingerprints. Added docs/morning-review.md with demo, evidence, limitations and release gates.
+Final package artifacts/source archive will be refreshed for review; no more feature work is needed.
+
+## COMPLETE: morning review prepared early
+
+All authorized local-MVP completion criteria are met with the documented environment limits.
+Final base-only wheel smoke and distribution metadata checks pass. The installed wheel exports
+byte-for-byte the same Terraform template that passed validation. The latest application changes
+have 66 passing regressions and a successful real Functions/Azurite generated-host smoke test.
+The Docker engine remains unavailable; container runtime/cloud deployment are not claimed.
+The morning review pack is ready and the final local checkpoint captures the readiness review.
+Refresh local distribution/source artifacts, then stop overnight work and disable further scheduled
+runs. GitHub, TestPyPI, PyPI and all cloud deployment remain pending explicit approval.

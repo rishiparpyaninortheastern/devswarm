@@ -1,6 +1,6 @@
 # Verification report
 
-Prepared locally on October 19, 2026 (America/Chicago). No remote repository was created,
+Prepared locally October 19-20, 2026 (America/Chicago). No remote repository was created,
 no GitHub writes were performed, and no Azure resources were deployed.
 
 ## Passed
@@ -51,3 +51,7 @@ Recheck immediately before repository creation after user approval.
 Wheel and source distribution pass Twine checks. The base wheel passes isolated installation
 and CLI smoke tests outside the checkout. The wheel with API/Azure extras also passes real Core Tools
 and Azurite testing using a CLI-generated Functions host. See [packaging](packaging.md).
+
+Final Azure-readiness review adds prefix/subscription validation and synchronizes the packaged
+Terraform template; configuration validates without a cloud plan/apply. Docker context excludes
+local settings, environment files, data/logs and Terraform caches/state. See [morning review](morning-review.md).

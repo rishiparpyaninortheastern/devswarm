@@ -1,5 +1,7 @@
 # DevSwarm
 
+Start with the [morning review](docs/morning-review.md) for the demo, verified behavior and release decisions.
+
 Apache 2.0 licensed, Azure-oriented monorepo for evidence-backed incident triage.
 The working MVP is local-first: no cloud subscription, LLM key or GitHub token needed.
 Telemetry becomes a reviewable structured bug draft; no issues or PRs are published.

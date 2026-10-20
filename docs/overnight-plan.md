@@ -1,5 +1,7 @@
 # DevSwarm overnight plan
 
+Status: completed early; see `morning-review.md`. Publication remains pending human approval.
+
 Review target: October 20, 2026, 8:00 a.m. America/Chicago.
 
 ## Objective

@@ -12,15 +12,25 @@ provider "azurerm" {
   subscription_id = var.subscription_id
 }
 variable "subscription_id" {
-  type = string
+  description = "Azure subscription GUID; provide only when reviewing a deployment plan."
+  type        = string
+  validation {
+    condition     = can(regex("^[0-9a-fA-F]{8}(-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}$", var.subscription_id))
+    error_message = "subscription_id must be an Azure subscription GUID."
+  }
 }
 variable "location" {
   type    = string
   default = "eastus2"
 }
 variable "prefix" {
-  type    = string
-  default = "devswarm"
+  description = "Unique deployment prefix: 3-20 lowercase letters/digits/hyphens; start with a letter and end with a letter/digit."
+  type        = string
+  default     = "devswarm"
+  validation {
+    condition     = can(regex("^[a-z][a-z0-9-]{1,18}[a-z0-9]$", var.prefix))
+    error_message = "prefix must be 3-20 lowercase characters, start with a letter and end with a letter or digit."
+  }
 }
 resource "azurerm_resource_group" "main" {
   name     = "${var.prefix}-dev-rg"
