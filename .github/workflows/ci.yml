@@ -1,0 +1,45 @@
+name: CI
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  python:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -c requirements.lock.txt -e '.[dev]'
+      - run: ruff check .
+      - run: pytest -q
+      - run: docker compose config --quiet
+      - run: docker build -t devswarm:test .
+  terraform:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: '1.9.8'
+      - run: terraform -chdir=infra/terraform fmt -check
+      - run: terraform -chdir=infra/terraform init -backend=false
+      - run: terraform -chdir=infra/terraform validate
+
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install build twine
+      - run: python -m build
+      - run: python -m twine check dist/*
+      - run: python -m venv .data/package-env
+      - run: .data/package-env/bin/python -m pip install dist/*.whl
+      - run: python scripts/installed_package_smoke.py --python .data/package-env/bin/python
+      - uses: actions/upload-artifact@v4
+        with:
+          name: devswarm-distributions
+          path: dist/*

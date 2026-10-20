@@ -1,0 +1,1 @@
+{"service":"checkout","environment":"local","exception_type":"TimeoutError","message":"Inventory request timed out after 3000 ms","stack":["checkout.py:42 in reserve_inventory"],"occurred_at":"2026-10-19T18:00:00Z","sanitized":true}

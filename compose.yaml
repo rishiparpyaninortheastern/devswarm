@@ -1,0 +1,19 @@
+services:
+  api:
+    build: .
+    ports: ["127.0.0.1:8000:8000"]
+    volumes: ["data:/data"]
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+  worker:
+    build: .
+    command: ["python", "-m", "apps.worker.main"]
+    volumes: ["data:/data"]
+    depends_on:
+      api:
+        condition: service_healthy
+volumes:
+  data:

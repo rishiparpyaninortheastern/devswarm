@@ -1,0 +1,20 @@
+{
+  "status": "passed",
+  "run_directory": ".data/functions-smoke-20261020T043637Z",
+  "checks": [
+    "Azurite blob service accepted a local connection",
+    "Real Functions host, Azurite and API started",
+    "HTTP intake and duplicate detection: 202, count 2",
+    "Unsanitized payload rejected with generic 422",
+    "Worker generated evidence-backed review draft; API reads shared persistence",
+    "Repeat after drafting preserves draft and increments count to 3",
+    "Draft and occurrence count survive Functions host restart",
+    "Synthetic secrets absent from database, draft and service logs"
+  ],
+  "installation": "Built wheel with API/Azure extras; CLI-generated Functions host",
+  "tools": {
+    "core_tools": "4.16.0",
+    "functions_runtime": "4.1054.250.26428",
+    "python": "3.12"
+  }
+}
