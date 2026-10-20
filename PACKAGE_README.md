@@ -2,7 +2,7 @@
 
 Local-first, evidence-backed incident triage. Apache 2.0 licensed, alpha release.
 Accept sanitized telemetry, fingerprint/deduplicate it, and generate a structured bug draft
-with exact evidence excerpts and explicit unknowns. No model key or cloud account required.
+with exact evidence excerpts, cited observations, explicit unknowns and review next steps. No model key or cloud account required.
 No automatic GitHub writes or code execution.
 
 ## Installation
@@ -86,5 +86,7 @@ not binaries bundled into the Python package.
 
 Submit only upstream-sanitized telemetry. Defensive redaction is best effort, not comprehensive DLP.
 SQLite is plaintext and intended for local use. Root cause and exact reproduction remain unverified;
-drafts require human review. Numeric/UUID normalization is heuristic. Forge is disabled and Courier
+drafts require human review. Fingerprint v2 normalizes durations, explicit request IDs, source line numbers and UUIDs while
+preserving HTTP/error codes and other numeric values. It is heuristic. Legacy alpha fingerprints
+remain readable but do not deduplicate with newly generated v2 keys; no automatic migration is provided. Forge is disabled and Courier
 exports JSON only. This alpha has no production authentication or hosted Azure deployment.

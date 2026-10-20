@@ -18,8 +18,13 @@ flowchart LR
 ```
 
 Atlas coordinates intake. Sentinel hashes service, environment, exception, normalized message and
-stack; timestamps are excluded and numbers/UUIDs are normalized. Distinct messages and environments
-remain separate. This heuristic can merge distinct numeric errors or split text variants; review is required.
+stack. Fingerprint v2 excludes event time and normalizes durations, UUIDs, explicit request/trace/
+correlation IDs and source line numbers. HTTP status codes, error codes, ports, versions and business
+values remain significant. Distinct messages and environments
+remain separate. This heuristic can still merge failures differing only in normalized values or split textual variants;
+review is required. Fingerprint v2 changes keys from the initial broad numeric-normalization scheme.
+Old keys/drafts remain readable, but new events do not deduplicate against legacy keys. There is no
+automatic migration; use a separate fresh database when comparing versions, and retain old data for review.
 SQLite uses unique keys and immediate transactions so simultaneous repeats increment exactly once per request.
 Delivery is at least once: there is no producer event ID, so transport retries count as occurrences.
 A crash during drafting rolls back and the next poll retries. Single-transaction local drafting intentionally
@@ -46,3 +51,15 @@ Installable code lives exclusively under `src/devswarm`, including apps, agents,
 and MCP servers. Root apps retain host wrappers; root agent directories point to their packaged
 implementations. Pydantic is the base dependency; API, MCP and Functions are optional extras.
 The CLI exports local Functions and Terraform templates without provisioning anything.
+
+## Structured review drafts
+
+Every deterministic draft includes observations with evidence IDs, an explicit unknowns list and
+conservative review/reproduction next steps. Evidence includes the sanitized message and stack plus
+producer-supplied service, environment, exception type and event time. Producer event time is an
+observation, not a verified wall-clock claim. Citation references must exist and evidence IDs must
+be unique; persistence rejects evidence that differs from the stored sanitized first observation.
+The local provider never claims a verified root cause, severity or exact reproduction.
+Legacy drafts missing the additive observation/unknown/next-step fields remain readable.
+See `examples/bug-draft.json` for deterministic synthetic output and `examples/http-failures.json`
+for two distinct HTTP failures with a duration-only repeat.

@@ -28,3 +28,7 @@ Functions uses function-level authentication in Azure; local Core Tools may bypa
 Azure foundation is not a hardened production deployment; see infrastructure gaps in the README.
 
 Report vulnerabilities privately to the repository owner; do not put secrets in public issues.
+
+Structured observations are checked for missing/duplicate evidence references. Such structural
+validation does not prove the truth of an arbitrary provider's prose; the shipped deterministic
+provider only describes submitted observations and keeps causal claims explicitly unknown.

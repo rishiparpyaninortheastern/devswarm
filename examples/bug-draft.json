@@ -1,0 +1,80 @@
+{
+  "fingerprint": "d923fa1fe45fee51057d7e8b511b23b2fdf3f8b7c7a6eaa196d262ac9aefdb49",
+  "title": "checkout: TimeoutError",
+  "summary": "Observed TimeoutError in local; see E1.",
+  "evidence": [
+    {
+      "id": "E1",
+      "field": "message",
+      "excerpt": "Inventory request timed out after 3000 ms"
+    },
+    {
+      "id": "E2",
+      "field": "stack[0]",
+      "excerpt": "checkout.py:42 in reserve_inventory"
+    },
+    {
+      "id": "C1",
+      "field": "service",
+      "excerpt": "checkout"
+    },
+    {
+      "id": "C2",
+      "field": "environment",
+      "excerpt": "local"
+    },
+    {
+      "id": "C3",
+      "field": "exception_type",
+      "excerpt": "TimeoutError"
+    },
+    {
+      "id": "C4",
+      "field": "occurred_at",
+      "excerpt": "2026-10-19T18:00:00+00:00"
+    }
+  ],
+  "observations": [
+    {
+      "statement": "Telemetry reports TimeoutError for checkout in local.",
+      "evidence_ids": [
+        "C1",
+        "C2",
+        "C3"
+      ]
+    },
+    {
+      "statement": "The submitted event includes the failure message shown in E1.",
+      "evidence_ids": [
+        "E1"
+      ]
+    },
+    {
+      "statement": "Producer reported the event time as 2026-10-19T18:00:00+00:00.",
+      "evidence_ids": [
+        "C4"
+      ]
+    }
+  ],
+  "unknowns": [
+    "Root cause",
+    "Exact reproduction steps",
+    "Affected source revision",
+    "User impact and severity",
+    "Whether the failure is still occurring"
+  ],
+  "next_steps": [
+    "Review E1 and any stack evidence against the affected source revision.",
+    "Reproduce in an isolated environment before proposing a fix.",
+    "Have a maintainer verify impact and approve any external issue."
+  ],
+  "hypotheses": [
+    "Root cause is unverified; inspect the cited stack and source."
+  ],
+  "reproduction": [
+    "Exact reproduction is unknown.",
+    "Use the sanitized evidence to prepare a reproduction in an isolated environment."
+  ],
+  "status": "needs_human_review",
+  "provider": "local-deterministic"
+}

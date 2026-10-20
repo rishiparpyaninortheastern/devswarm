@@ -52,3 +52,17 @@ Lint/format pass. Rebuilt wheel/sdist pass Twine and a fresh base-only installed
 All work is local; GitHub/PyPI remain unpublished. Commit this verified security milestone.
 Next useful work: fingerprint semantics (currently normalizes every number, including HTTP codes),
 more informative evidence-backed draft fields/fixtures, and morning review summary.
+
+## 1:30 a.m. Chicago: fingerprints and review-draft quality
+
+Fixed a correctness issue where broad numeric normalization merged HTTP 401 with 503 and distinct
+error codes/ports/business values. Fingerprint v2 now normalizes only durations, UUIDs, explicit
+request/trace/correlation IDs and source line numbers; other numbers remain significant.
+Documented alpha key compatibility: old records remain readable, new events use v2 keys, no migration.
+Added cited structured observations, producer-context evidence, explicit unknowns and review next
+steps. Citation IDs are validated and legacy drafts remain readable. Added synthetic HTTP failure
+scenario and sample structured draft. Regression suite now has 59 passing tests, with semantic-number,
+volatile-value, citation, backward-compatibility and database-level deduplication checks.
+Rebuilt distributions pass Twine and base-only installed-wheel smoke checks. The rebuilt wheel
+with API/Azure extras also passes the real generated-host Functions/Azurite test, including restart.
+Next: remaining operational/CLI error-path audit, Azure scaffold review and final morning handoff.

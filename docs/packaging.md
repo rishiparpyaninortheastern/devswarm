@@ -40,7 +40,7 @@ CI has no publishing step or PyPI credentials.
 
 Verified locally on Python 3.12:
 
-- 44 regression tests pass, including SDK, CLI, safe error output, no-overwrite initialization,
+- 59 regression tests pass, including SDK, CLI, safe error output, no-overwrite initialization,
   evidence integrity, concurrent deduplication, MCP calls and Functions intake.
 - Wheel and source distribution pass Twine metadata checks.
 - Fresh base-only wheel install runs demo, repeat, export and scaffold creation outside checkout.

@@ -1,0 +1,8 @@
+{
+  "description": "Synthetic sanitized HTTP failures; 401 and 503 must stay separate, duration-only retries merge.",
+  "incidents": [
+    {"service":"inventory-gateway","environment":"local","exception_type":"HTTPError","message":"Inventory returned HTTP 401 after 3000 ms","stack":["gateway.py:42 in call_inventory"],"occurred_at":"2026-10-20T00:00:00Z","sanitized":true},
+    {"service":"inventory-gateway","environment":"local","exception_type":"HTTPError","message":"Inventory returned HTTP 401 after 5000 ms","stack":["gateway.py:42 in call_inventory"],"occurred_at":"2026-10-20T00:01:00Z","sanitized":true},
+    {"service":"inventory-gateway","environment":"local","exception_type":"HTTPError","message":"Inventory returned HTTP 503 after 3000 ms","stack":["gateway.py:42 in call_inventory"],"occurred_at":"2026-10-20T00:02:00Z","sanitized":true}
+  ]
+}

@@ -1,6 +1,14 @@
 from typing import Annotated, Literal
 
-from pydantic import AwareDatetime, BaseModel, ConfigDict, Field, StringConstraints, field_validator
+from pydantic import (
+    AwareDatetime,
+    BaseModel,
+    ConfigDict,
+    Field,
+    StringConstraints,
+    field_validator,
+    model_validator,
+)
 
 
 class Contract(BaseModel):
@@ -34,15 +42,33 @@ class Evidence(Contract):
     excerpt: str
 
 
+class Observation(Contract):
+    statement: str = Field(min_length=1)
+    evidence_ids: list[str] = Field(min_length=1)
+
+
 class BugDraft(Contract):
     fingerprint: str
     title: str
     summary: str
-    evidence: list[Evidence]
+    evidence: list[Evidence] = Field(min_length=1)
+    observations: list[Observation] = Field(default_factory=list)
+    unknowns: list[str] = Field(default_factory=list)
+    next_steps: list[str] = Field(default_factory=list)
     hypotheses: list[str]
     reproduction: list[str]
     status: Literal["needs_human_review"] = "needs_human_review"
     provider: str = "local-deterministic"
+
+    @model_validator(mode="after")
+    def valid_evidence_references(self):
+        ids = [evidence.id for evidence in self.evidence]
+        if len(ids) != len(set(ids)):
+            raise ValueError("Evidence IDs must be unique")
+        for observation in self.observations:
+            if not set(observation.evidence_ids).issubset(ids):
+                raise ValueError("Observation refers to unavailable evidence")
+        return self
 
 
 class Receipt(Contract):
