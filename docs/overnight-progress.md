@@ -66,3 +66,17 @@ volatile-value, citation, backward-compatibility and database-level deduplicatio
 Rebuilt distributions pass Twine and base-only installed-wheel smoke checks. The rebuilt wheel
 with API/Azure extras also passes the real generated-host Functions/Azurite test, including restart.
 Next: remaining operational/CLI error-path audit, Azure scaffold review and final morning handoff.
+
+## 2:32 a.m. Chicago: operational failure isolation
+
+Found that a repeatedly failing oldest incident could indefinitely block newer work, and CLI
+SQLite/provider failures could escape as tracebacks. Added durable attempt/error/backoff metadata,
+three-attempt failure isolation, an explicit local retry command/SDK method, and safe CLI errors.
+Legacy SQLite schemas migrate additively without losing counts or drafts. Watch mode continues
+after handled provider failures; export distinguishes failed from pending drafts.
+66 regression tests cover backoff with a fake clock, healthy work progressing around poison input,
+retry-budget exhaustion and manual recovery, preserved completed drafts, legacy-schema migration,
+and safe CLI failures/watch behavior. No provider exception text is stored or emitted.
+Rebuilt wheel/sdist pass Twine, the base-only installed-wheel smoke passes, and the rebuilt wheel
+with API/Azure extras passes the real generated-host Functions/Azurite test including restart.
+Next: Azure scaffold/documentation review and final morning review pack; no public release.

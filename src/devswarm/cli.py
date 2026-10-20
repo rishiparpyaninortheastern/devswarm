@@ -4,6 +4,7 @@ import argparse
 import json
 import logging
 import os
+import sqlite3
 import sys
 import time
 from importlib import metadata, resources
@@ -13,6 +14,7 @@ from pydantic import ValidationError
 
 from devswarm.sdk import DevSwarm
 from devswarm.shared.contracts import BugDraft
+from devswarm.shared.persistence import DraftProcessingError
 
 
 def bundled(name):
@@ -44,6 +46,8 @@ def main(argv=None):
     mode = worker.add_mutually_exclusive_group()
     mode.add_argument("--once", action="store_true")
     mode.add_argument("--watch", action="store_true")
+    retry = commands.add_parser("retry", help="Reset a pending/failed incident for local retry")
+    retry.add_argument("fingerprint")
     show = commands.add_parser("show", help="Read an incident and its draft")
     show.add_argument("fingerprint")
     export = commands.add_parser("export", help="Print a reviewable draft as JSON")
@@ -112,9 +116,16 @@ def main(argv=None):
             elif args.command == "worker":
                 if args.watch:
                     while True:
-                        sdk.process_next()
+                        try:
+                            sdk.process_next()
+                        except DraftProcessingError:
+                            logging.getLogger(__name__).error(
+                                "Draft failed; inspect processing state"
+                            )
                         time.sleep(1)
                 result = {"processed": sdk.process_next()}
+            elif args.command == "retry":
+                result = {"reset": sdk.retry(args.fingerprint)}
             else:
                 result = sdk.get(args.fingerprint)
                 if result is None:
@@ -122,7 +133,8 @@ def main(argv=None):
                     return 1
                 if args.command == "export":
                     if result["draft"] is None:
-                        print('{"error":"draft_pending"}', file=sys.stderr)
+                        error = "draft_failed" if result["state"] == "failed" else "draft_pending"
+                        print(json.dumps({"error": error}), file=sys.stderr)
                         return 1
                     from devswarm.agents.courier import export
 
@@ -130,6 +142,15 @@ def main(argv=None):
                     return 0
         print(json.dumps(result, indent=2))
         return 0
+    except DraftProcessingError:
+        print(
+            '{"error":"draft_processing_failed","action":"inspect_processing_state"}',
+            file=sys.stderr,
+        )
+        return 1
+    except sqlite3.Error:
+        print('{"error":"local_database_error"}', file=sys.stderr)
+        return 2
     except ModuleNotFoundError:
         extra = {"serve": "api", "mcp": "mcp"}.get(args.command, "all")
         print(f'Install optional support with: pip install "devswarm[{extra}]"', file=sys.stderr)

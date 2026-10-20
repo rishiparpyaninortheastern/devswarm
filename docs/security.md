@@ -32,3 +32,7 @@ Report vulnerabilities privately to the repository owner; do not put secrets in 
 Structured observations are checked for missing/duplicate evidence references. Such structural
 validation does not prove the truth of an arbitrary provider's prose; the shipped deterministic
 provider only describes submitted observations and keeps causal claims explicitly unknown.
+
+Provider exception text is never persisted in retry metadata or printed by CLI processing commands.
+Errors are classified as invalid_incident, provider_failed or invalid_draft; the retry budget is bounded.
+Corrupt SQLite files produce a generic CLI database error rather than an unhandled traceback.

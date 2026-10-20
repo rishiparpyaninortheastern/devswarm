@@ -5,12 +5,12 @@ no GitHub writes were performed, and no Azure resources were deployed.
 
 ## Passed
 
-- Python 3.12: **59 tests passed** (pytest 9.1.1).
+- Python 3.12: **66 tests passed** (pytest 9.1.1).
 - API accept -> pending -> worker -> evidence-backed draft -> duplicate receipt.
 - Concurrent intake counts 20 occurrences without duplicate rows.
 - Defensive redaction occurs before storage and drafting.
 - Schema rejection returns generic validation responses.
-- Provider failure rolls back for retry; fabricated evidence is rejected.
+- Provider failures record bounded retry state without draft creation; fabricated evidence is rejected.
 - Azure Functions HTTP handler invoked directly and via a real Core Tools 4.16.0 host.
 - Azurite readiness, Functions HTTP intake, duplicate counts, generic 422 rejection,
   separate worker draft generation, shared API reads, Functions restart persistence,

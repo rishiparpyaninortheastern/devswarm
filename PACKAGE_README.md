@@ -33,6 +33,8 @@ devswarm --db ./incidents.db ingest incident.json
 devswarm --db ./incidents.db worker --once
 devswarm --db ./incidents.db show FINGERPRINT
 devswarm --db ./incidents.db export FINGERPRINT
+# After fixing a processing failure:
+devswarm --db ./incidents.db retry FINGERPRINT
 ```
 
 `demo` uses a bundled fixture, stores it locally and creates a reviewable draft. Repeated intake
@@ -90,3 +92,13 @@ drafts require human review. Fingerprint v2 normalizes durations, explicit reque
 preserving HTTP/error codes and other numeric values. It is heuristic. Legacy alpha fingerprints
 remain readable but do not deduplicate with newly generated v2 keys; no automatic migration is provided. Forge is disabled and Courier
 exports JSON only. This alpha has no production authentication or hosted Azure deployment.
+
+
+## Processing failures
+
+`show` and API reads include processing attempts, a safe error code and the next retry time
+(Unix seconds). Failed work retries with short exponential backoff, stops automatically after three
+failed attempts, and becomes `failed`. One bad incident does not block other eligible work.
+Inspect/fix the problem, then use `retry FINGERPRINT` to reset pending/failed work; completed drafts
+are never reset. Provider exception text is not stored or printed. Existing local databases receive
+an additive retry-column migration that preserves records.

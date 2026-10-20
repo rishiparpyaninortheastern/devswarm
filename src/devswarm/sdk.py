@@ -23,3 +23,7 @@ class DevSwarm:
 
     def get(self, fingerprint: str) -> dict | None:
         return self.store.get(fingerprint)
+
+    def retry(self, fingerprint: str) -> bool:
+        """Reset local pending/failed work for an explicit retry; completed drafts are preserved."""
+        return self.store.retry(fingerprint)

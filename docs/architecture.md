@@ -27,7 +27,11 @@ Old keys/drafts remain readable, but new events do not deduplicate against legac
 automatic migration; use a separate fresh database when comparing versions, and retain old data for review.
 SQLite uses unique keys and immediate transactions so simultaneous repeats increment exactly once per request.
 Delivery is at least once: there is no producer event ID, so transport retries count as occurrences.
-A crash during drafting rolls back and the next poll retries. Single-transaction local drafting intentionally
+A crash during drafting rolls back and the next poll retries. Handled generation/validation failures
+commit a generic error code, attempt count and short exponential backoff. The local worker stops
+automatically after three failed attempts and excludes failed work from polling, allowing other
+eligible incidents to progress. `devswarm retry FINGERPRINT` explicitly resets pending/failed work;
+completed drafts stay intact. Existing databases receive additive retry columns under a transaction. Single-transaction local drafting intentionally
 serializes workers; it is suitable for a small offline MVP, not slow remote inference.
 Only the first sanitized observation is retained per fingerprint; counts include repeats.
 Drafts cite exact message/stack excerpts, label root cause and reproduction unknown, and require human review.

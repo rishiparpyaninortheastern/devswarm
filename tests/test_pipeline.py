@@ -11,7 +11,7 @@ from devswarm.apps.api.main import app
 from devswarm.apps.worker.main import tick
 from devswarm.shared.contracts import Incident
 from devswarm.shared.llm import LocalDraftProvider
-from devswarm.shared.persistence import SQLiteStore
+from devswarm.shared.persistence import DraftProcessingError, SQLiteStore
 
 
 @pytest.fixture
@@ -75,7 +75,7 @@ def test_provider_failure_retries(tmp_path, event):
         def generate(self, *args):
             raise RuntimeError("failure")
 
-    db = SQLiteStore(str(tmp_path / "retry.db"))
+    db = SQLiteStore(str(tmp_path / "retry.db"), retry_base_seconds=0)
     key = accept(db, event).fingerprint
     with pytest.raises(RuntimeError):
         db.process_next(Broken())
@@ -138,7 +138,7 @@ def test_unbacked_evidence_rejected(tmp_path, event):
 
     db = SQLiteStore(str(tmp_path / "unbacked.db"))
     key = accept(db, event).fingerprint
-    with pytest.raises(ValueError, match="evidence"):
+    with pytest.raises(DraftProcessingError):
         db.process_next(Fabricated())
     assert db.get(key)["state"] == "pending"
 
