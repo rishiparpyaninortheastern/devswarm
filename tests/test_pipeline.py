@@ -2,9 +2,6 @@ import json
 from concurrent.futures import ThreadPoolExecutor
 
 import pytest
-from devswarm.shared.contracts import Incident
-from devswarm.shared.llm import LocalDraftProvider
-from devswarm.shared.persistence import SQLiteStore
 from fastapi.testclient import TestClient
 
 from devswarm.agents.atlas import accept
@@ -12,6 +9,9 @@ from devswarm.agents.guardian import sanitize
 from devswarm.agents.sentinel import fingerprint
 from devswarm.apps.api.main import app
 from devswarm.apps.worker.main import tick
+from devswarm.shared.contracts import Incident
+from devswarm.shared.llm import LocalDraftProvider
+from devswarm.shared.persistence import SQLiteStore
 
 
 @pytest.fixture
@@ -146,9 +146,10 @@ def test_unbacked_evidence_rejected(tmp_path, event):
 def test_mcp_protocol(event, tmp_path, monkeypatch):
     import asyncio
 
+    from fastmcp import Client
+
     from devswarm.tool_servers.drafts import mcp as drafts
     from devswarm.tool_servers.evidence import mcp as evidence
-    from fastmcp import Client
 
     monkeypatch.setenv("DEVSWARM_DB", str(tmp_path / "mcp.db"))
 

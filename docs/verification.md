@@ -5,7 +5,7 @@ no GitHub writes were performed, and no Azure resources were deployed.
 
 ## Passed
 
-- Python 3.12: **23 tests passed** (pytest 9.1.1).
+- Python 3.12: **44 tests passed** (pytest 9.1.1).
 - API accept -> pending -> worker -> evidence-backed draft -> duplicate receipt.
 - Concurrent intake counts 20 occurrences without duplicate rows.
 - Defensive redaction occurs before storage and drafting.

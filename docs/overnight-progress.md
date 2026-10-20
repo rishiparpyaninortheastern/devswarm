@@ -38,3 +38,17 @@ Preserve packaging behavior during the remaining correctness audit and morning h
 User requested ongoing commits. Prepared work is now being captured as the first local checkpoint
 on main, with later verified milestones committed individually. No remote is configured or pushed.
 Commit author uses the connected user's name and existing Git email configuration.
+
+## 12:29 a.m. Chicago: intake-security audit
+
+Reproduced 13 failing regression cases in the baseline: quoted/JSON credentials and Basic headers
+could leak synthetic secrets, sanitized=1/1.0 was accepted as true, unvalidated model instances
+bypassed SDK checks, and input stack-line sizes were unbounded. Fixed quoted/JSON key-value
+redaction and Basic/Bearer/Azure key matching; Incident now requires literal boolean true,
+revalidates instances, and rejects oversized stack lines. Redaction expansion is bounded only
+after removing credentials, keeping persisted records valid and processable. Structured credentials
+are verified absent from SQLite and drafts. Current regression suite: 44 tests, all passing.
+Lint/format pass. Rebuilt wheel/sdist pass Twine and a fresh base-only installed-wheel smoke test.
+All work is local; GitHub/PyPI remain unpublished. Commit this verified security milestone.
+Next useful work: fingerprint semantics (currently normalizes every number, including HTTP codes),
+more informative evidence-backed draft fields/fixtures, and morning review summary.

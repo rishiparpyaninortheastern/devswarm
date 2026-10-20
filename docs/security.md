@@ -1,9 +1,14 @@
 # Security and trust boundaries
 
 Only submit already-sanitized telemetry. `sanitized: true` is a producer assertion, not proof.
-Strict allowlisted fields reject request bodies, arbitrary metadata and unknown fields. Defensive
-redaction removes common key/value credentials, bearer tokens, email addresses, IPv4 and URLs
-before fingerprinting, persistence or draft generation. Stack entries are truncated to 1000 characters.
+Strict allowlisted fields reject request bodies, arbitrary metadata and unknown fields.
+The sanitization assertion must be the literal JSON boolean true; numeric lookalikes are rejected.
+SDK/model instances are revalidated at the intake boundary, including instances built without validation. Defensive
+redaction removes common quoted/unquoted key/value and JSON-style credentials, Bearer/Basic
+authorization values, Azure AccountKey/SharedAccessKey fields, email addresses, IPv4 and URLs
+before fingerprinting, persistence or draft generation. Input stack entries over 1000 characters
+are rejected rather than silently truncated. Redaction occurs before enforcing output excerpt limits
+(4000 characters for the message, 1000 per stack line), since replacement markers may expand text.
 This is best effort, not comprehensive DLP: arbitrary secrets, names, IPv6 and unusual credentials
 may remain. Producers must sanitize upstream and avoid sensitive data in service/type labels.
 Validation errors return generic text, never echo raw input. The app does not log telemetry. Allowlisted operational events contain only fingerprint,

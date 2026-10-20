@@ -1,8 +1,7 @@
 import json
 
-from devswarm.cli import main
-
 from devswarm import DevSwarm
+from devswarm.cli import main
 
 
 def test_cli_offline_workflow(tmp_path, capsys):
