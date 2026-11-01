@@ -17,7 +17,7 @@ pip install "git+https://github.com/rishiparpyaninortheastern/devswarm.git"
 devswarm demo
 ```
 
-Requires Python 3.11+ and Git. Plain `pip install devswarm` is pending the first PyPI release;
+Requires Python 3.11+ and Git. Plain `pip install swarmsleuth` is pending the first PyPI release;
 see [release setup](docs/pypi-release.md). Do not assume the PyPI name has been registered yet.
 
 ## Installable Python package

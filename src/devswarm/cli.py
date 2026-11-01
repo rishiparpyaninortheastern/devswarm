@@ -35,7 +35,7 @@ def initialize(directory, files):
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description="DevSwarm offline incident-to-bug-draft tools")
-    parser.add_argument("--version", action="version", version=metadata.version("devswarm"))
+    parser.add_argument("--version", action="version", version=metadata.version("swarmsleuth"))
     parser.add_argument("--db", default=os.environ.get("DEVSWARM_DB", ".data/devswarm.db"))
     commands = parser.add_subparsers(dest="command", required=True)
     commands.add_parser("sample", help="Print a bundled sanitized incident fixture")
@@ -90,7 +90,7 @@ def main(argv=None):
                     "function_app.py": "from devswarm.apps.ingestion.function_app import app as app\n",
                     "host.json": bundled("host.json"),
                     "local.settings.json": json.dumps(settings, indent=2) + "\n",
-                    "requirements.txt": f"devswarm[azure]=={metadata.version('devswarm')}\n",
+                    "requirements.txt": f"swarmsleuth[azure]=={metadata.version('swarmsleuth')}\n",
                     ".gitignore": "local.settings.json\n__pycache__/\n",
                 },
             )
@@ -153,7 +153,7 @@ def main(argv=None):
         return 2
     except ModuleNotFoundError:
         extra = {"serve": "api", "mcp": "mcp"}.get(args.command, "all")
-        print(f'Install optional support with: pip install "devswarm[{extra}]"', file=sys.stderr)
+        print(f'Install optional support with: pip install "swarmsleuth[{extra}]"', file=sys.stderr)
         return 2
     except (ValidationError, ValueError):
         print('{"error":"invalid_input"}', file=sys.stderr)

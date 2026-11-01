@@ -1,4 +1,4 @@
-# DevSwarm
+# SwarmSleuth (DevSwarm)
 
 Local-first, evidence-backed incident triage. Apache 2.0 licensed, alpha release.
 Accept sanitized telemetry, fingerprint/deduplicate it, and generate a structured bug draft
@@ -7,7 +7,7 @@ No automatic GitHub writes or code execution.
 
 ## Installation
 
-**PyPI release is pending owner-account setup.** You can install now from the public GitHub repository:
+**The SwarmSleuth PyPI release is being prepared.** You can install now from the public GitHub repository:
 
 ```sh
 python -m pip install "git+https://github.com/rishiparpyaninortheastern/devswarm.git"
@@ -17,18 +17,18 @@ devswarm demo
 This requires Git and Python 3.11+. Alternatively, install the prepared local wheel:
 
 ```sh
-python -m pip install ./devswarm-0.1.0-py3-none-any.whl
+python -m pip install ./swarmsleuth-0.1.0-py3-none-any.whl
 ```
 
-After the first PyPI release, the public command will be `pip install devswarm`.
+After the first PyPI release, the public command will be `pip install swarmsleuth`.
 Use Python 3.11+. The base package requires Pydantic; optional integrations are separate:
 
 ```sh
 # After publication, or use the matching wheel path with extras before publication:
-pip install 'devswarm[api]'    # FastAPI + Uvicorn
-pip install 'devswarm[mcp]'    # FastMCP tool servers
-pip install 'devswarm[azure]'  # Azure Functions entry point
-pip install 'devswarm[all]'    # All optional integrations
+pip install 'swarmsleuth[api]'    # FastAPI + Uvicorn
+pip install 'swarmsleuth[mcp]'    # FastMCP tool servers
+pip install 'swarmsleuth[azure]'  # Azure Functions entry point
+pip install 'swarmsleuth[all]'    # All optional integrations
 ```
 
 ## Offline quick start

@@ -40,8 +40,8 @@ def main():
     call("init-functions", "host")
     call("init-functions", "host", expected=2)
     call("init-azure", "azure-foundation")
-    assert "devswarm[api]" in call("serve", expected=2).stderr
-    assert "devswarm[mcp]" in call("mcp", "drafts", expected=2).stderr
+    assert "swarmsleuth[api]" in call("serve", expected=2).stderr
+    assert "swarmsleuth[mcp]" in call("mcp", "drafts", expected=2).stderr
     code = """
 import devswarm
 import importlib.util

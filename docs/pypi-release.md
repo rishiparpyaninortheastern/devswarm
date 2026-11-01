@@ -1,9 +1,9 @@
 # First PyPI release
 
-The user authorized a public PyPI release on November 1, 2026. The devswarm JSON endpoint
-returned 404 at the availability check. No package name has been reserved or registered yet.
-Publication is currently blocked only by owner-account setup: the user does not have a PyPI account.
-No token is configured locally, and no package upload has been attempted.
+The owner completed account, email and 2FA setup and registered a pending publisher for
+`SwarmSleuth`. PyPI rejected `devswarm` as too similar to an existing project. The distribution
+is now `swarmsleuth`; the CLI and Python import remain `devswarm`. Publication awaits a
+successful release workflow and fresh-install verification.
 
 ## Install now, without a PyPI account
 
@@ -13,7 +13,7 @@ devswarm demo
 ```
 
 This uses the public GitHub source and needs Python 3.11+ and Git. It is distinct from publishing
-to the PyPI index; `pip install devswarm` will work only after the first successful PyPI upload.
+to the PyPI index; `pip install swarmsleuth` will work only after the first successful PyPI upload.
 
 ## One-time owner setup
 
@@ -23,7 +23,7 @@ to the PyPI index; `pip install devswarm` will work only after the first success
 
    | Field | Value |
    |---|---|
-   | PyPI project name | `devswarm` |
+   | PyPI project name | `SwarmSleuth` |
    | GitHub owner | `rishiparpyaninortheastern` |
    | Repository | `devswarm` |
    | Workflow filename | `publish.yml` |
@@ -41,10 +41,10 @@ to the PyPI index; `pip install devswarm` will work only after the first success
 
 ## Completion verification
 
-After the workflow succeeds, verify https://pypi.org/project/devswarm/ and, in a fresh environment:
+After the workflow succeeds, verify https://pypi.org/project/swarmsleuth/ and, in a fresh environment:
 
 ```sh
-pip install --index-url https://pypi.org/simple/ devswarm==0.1.0
+pip install --index-url https://pypi.org/simple/ swarmsleuth==0.1.0
 devswarm --version
 devswarm demo
 ```
