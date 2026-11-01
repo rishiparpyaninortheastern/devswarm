@@ -79,4 +79,5 @@ Dependency ranges are in `pyproject.toml`; `requirements.lock.txt` records the t
 ## Publication
 
 Prepared for `rishiparpyaninortheastern/devswarm`, public, Apache-2.0.
-Nothing is automatically published. Creating the repository and pushing this tree require explicit approval.
+Published to [GitHub](https://github.com/rishiparpyaninortheastern/devswarm) with user approval.
+PyPI/TestPyPI publication and Azure deployment remain separate, pending decisions.

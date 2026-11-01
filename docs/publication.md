@@ -1,15 +1,17 @@
-# Publication proposal — awaiting explicit approval
+# GitHub publication
 
-- Owner: rishiparpyaninortheastern
-- Repository: devswarm
+Authorized by the user on November 1, 2026.
+
+- Repository: https://github.com/rishiparpyaninortheastern/devswarm
 - Visibility: public
 - License: Apache-2.0 (full LICENSE and NOTICE included)
 - Default branch: main
-- Description: Local-first, evidence-backed incident triage with an Azure-native architecture.
+- Local development history is preserved alongside GitHub's license initialization commit.
 
-Only repository source files should be published. .venv, .data, .terraform, state, secrets and
-local development outputs are excluded by .gitignore. Review git status before committing.
-No deployment credentials or GitHub write tokens are required for the MVP.
+The upload includes committed source, documentation, tests, CI and infrastructure templates.
+It excludes keys, environment files, local settings, virtual environments, telemetry/databases,
+raw logs, provider caches/state and build outputs. A history review found no private-key or
+known credential-pattern matches in the prepared history. Ignore rules also protect common
+credential-file types and local runtime exports; future changes still need review before pushing.
 
-After explicit user approval, recheck the name, create the repository, commit reviewed source,
-and push main. Do not deploy Azure resources as part of repository publication.
+PyPI/TestPyPI publication and Azure deployment remain separate decisions and were not performed.
