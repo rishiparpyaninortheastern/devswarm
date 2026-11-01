@@ -10,19 +10,19 @@ See [credits and provenance](CREDITS.md) for the open-source foundations and rel
 This independent experiment is separate from the existing
 [DevSwarm development product](https://github.com/devswarm-ai/devswarm); no affiliation is implied.
 
-## Install directly with pip
+## Install with pip
 
 ```sh
-pip install "git+https://github.com/rishiparpyaninortheastern/devswarm.git"
+pip install swarmsleuth
 devswarm demo
 ```
 
-Requires Python 3.11+ and Git. Plain `pip install swarmsleuth` is pending the first PyPI release;
-see [release setup](docs/pypi-release.md). Do not assume the PyPI name has been registered yet.
+Requires Python 3.11+. Published as [SwarmSleuth](https://pypi.org/project/swarmsleuth/);
+the command and Python import remain `devswarm`. PyPI rejected the original distribution name.
 
 ## Installable Python package
 
-A compact wheel and source distribution are prepared under `dist/`; nothing is uploaded to PyPI.
+A compact wheel and source distribution are prepared under `dist/`; version 0.1.0 is published on PyPI.
 See [package quick start](PACKAGE_README.md) for the `devswarm` command, Python API and optional extras.
 The implementation lives under `src/devswarm`; the `apps` directories retain monorepo host entry points.
 

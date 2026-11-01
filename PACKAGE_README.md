@@ -7,24 +7,23 @@ No automatic GitHub writes or code execution.
 
 ## Installation
 
-**The SwarmSleuth PyPI release is being prepared.** You can install now from the public GitHub repository:
+Install the published package from PyPI:
 
 ```sh
-python -m pip install "git+https://github.com/rishiparpyaninortheastern/devswarm.git"
+python -m pip install swarmsleuth
 devswarm demo
 ```
 
-This requires Git and Python 3.11+. Alternatively, install the prepared local wheel:
+This requires Python 3.11+. Alternatively, install the prepared local wheel:
 
 ```sh
 python -m pip install ./swarmsleuth-0.1.0-py3-none-any.whl
 ```
 
-After the first PyPI release, the public command will be `pip install swarmsleuth`.
+The distribution is `swarmsleuth`; the CLI and Python import remain `devswarm`.
 Use Python 3.11+. The base package requires Pydantic; optional integrations are separate:
 
 ```sh
-# After publication, or use the matching wheel path with extras before publication:
 pip install 'swarmsleuth[api]'    # FastAPI + Uvicorn
 pip install 'swarmsleuth[mcp]'    # FastMCP tool servers
 pip install 'swarmsleuth[azure]'  # Azure Functions entry point
