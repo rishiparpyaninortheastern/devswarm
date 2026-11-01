@@ -20,6 +20,11 @@ classifiers = [
 ]
 dependencies = ["pydantic>=2.10,<3"]
 
+[project.urls]
+Repository = "https://github.com/rishiparpyaninortheastern/devswarm"
+Issues = "https://github.com/rishiparpyaninortheastern/devswarm/issues"
+Documentation = "https://github.com/rishiparpyaninortheastern/devswarm/blob/main/PACKAGE_README.md"
+
 [project.optional-dependencies]
 api = ["fastapi>=0.115,<1", "uvicorn>=0.34,<1"]
 azure = ["azure-functions>=1.21,<2"]

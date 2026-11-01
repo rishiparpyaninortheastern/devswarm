@@ -7,13 +7,20 @@ No automatic GitHub writes or code execution.
 
 ## Installation
 
-**This release is prepared locally and has not been published to PyPI.** Install the supplied wheel:
+**PyPI release is pending owner-account setup.** You can install now from the public GitHub repository:
+
+```sh
+python -m pip install "git+https://github.com/rishiparpyaninortheastern/devswarm.git"
+devswarm demo
+```
+
+This requires Git and Python 3.11+. Alternatively, install the prepared local wheel:
 
 ```sh
 python -m pip install ./devswarm-0.1.0-py3-none-any.whl
 ```
 
-After an approved PyPI release, the intended public command is `pip install devswarm`.
+After the first PyPI release, the public command will be `pip install devswarm`.
 Use Python 3.11+. The base package requires Pydantic; optional integrations are separate:
 
 ```sh

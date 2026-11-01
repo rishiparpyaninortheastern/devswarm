@@ -6,6 +6,16 @@ Apache 2.0 licensed, Azure-oriented monorepo for evidence-backed incident triage
 The working MVP is local-first: no cloud subscription, LLM key or GitHub token needed.
 Telemetry becomes a reviewable structured bug draft; no issues or PRs are published.
 
+## Install directly with pip
+
+```sh
+pip install "git+https://github.com/rishiparpyaninortheastern/devswarm.git"
+devswarm demo
+```
+
+Requires Python 3.11+ and Git. Plain `pip install devswarm` is pending the first PyPI release;
+see [release setup](docs/pypi-release.md). Do not assume the PyPI name has been registered yet.
+
 ## Installable Python package
 
 A compact wheel and source distribution are prepared under `dist/`; nothing is uploaded to PyPI.
