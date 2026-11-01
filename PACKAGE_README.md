@@ -109,3 +109,8 @@ failed attempts, and becomes `failed`. One bad incident does not block other eli
 Inspect/fix the problem, then use `retry FINGERPRINT` to reset pending/failed work; completed drafts
 are never reset. Provider exception text is not stored or printed. Existing local databases receive
 an additive retry-column migration that preserves records.
+
+## Credits
+
+See [credits and provenance](https://github.com/rishiparpyaninortheastern/devswarm/blob/main/CREDITS.md)
+for dependencies, related projects, and clarification about the separate product sharing this name.

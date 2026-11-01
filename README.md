@@ -6,6 +6,10 @@ Apache 2.0 licensed, Azure-oriented monorepo for evidence-backed incident triage
 The working MVP is local-first: no cloud subscription, LLM key or GitHub token needed.
 Telemetry becomes a reviewable structured bug draft; no issues or PRs are published.
 
+See [credits and provenance](CREDITS.md) for the open-source foundations and related work.
+This independent experiment is separate from the existing
+[DevSwarm development product](https://github.com/devswarm-ai/devswarm); no affiliation is implied.
+
 ## Install directly with pip
 
 ```sh

@@ -1,4 +1,4 @@
-include README.md PACKAGE_README.md LICENSE NOTICE Dockerfile compose.yaml requirements.lock.txt
+include README.md PACKAGE_README.md CREDITS.md LICENSE NOTICE Dockerfile compose.yaml requirements.lock.txt
 recursive-include docs *.md *.json
 recursive-include examples *.json
 recursive-include infra *.tf *.md .terraform.lock.hcl
