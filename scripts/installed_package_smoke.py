@@ -14,7 +14,9 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--python", type=Path, required=True, help="Fresh environment's Python")
     args = parser.parse_args()
-    python = args.python.resolve()
+    # Linux venv Python is often a symlink to the base interpreter. Keep the
+    # supplied venv path so the CLI and imports come from that environment.
+    python = args.python.absolute()
     cli = python.parent / ("devswarm.exe" if os.name == "nt" else "devswarm")
     run = ROOT / ".data" / ("wheel-smoke-" + datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ"))
     run.mkdir(parents=True)
