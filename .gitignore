@@ -13,3 +13,18 @@ local.settings.json
 
 build/
 dist/
+
+# Local credentials, exports and runtime files
+.env.*
+!.env.example
+*.pem
+*.key
+*.pfx
+*.p12
+*.jks
+credentials.json
+service-account*.json
+*.db
+*.db-wal
+*.db-shm
+*.log
